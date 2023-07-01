@@ -1,9 +1,7 @@
-import { useRef, FC } from "react";
-import { CSSTransition } from "react-transition-group";
+import { FC } from "react";
 import s from "./InfoSlide.module.scss";
 import { TimezoneType } from "../../App";
 
-const duration = 300;
 
 interface PropsType {
    timezone: TimezoneType;

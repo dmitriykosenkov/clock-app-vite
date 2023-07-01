@@ -18,7 +18,7 @@ export interface TimezoneType {
 }
 
 function App() {
-   const [theme, setTheme] = useState(true);
+   // const [theme, setTheme] = useState(true);
    const [openSlide, setOpenSlide] = useState(false);
    const [quote, setQuote] = useState<QuoteType>({ author: "", content: "" });
    const [currentTime, setCurrentTime] = useState(new Date());
@@ -51,11 +51,11 @@ function App() {
          console.log(error);
       }
    };
-   useEffect(() => {
-      theme
-         ? document.body.setAttribute("data-theme", "light")
-         : document.body.setAttribute("data-theme", "dark");
-   }, [theme]);
+   // useEffect(() => {
+   //    theme
+   //       ? document.body.setAttribute("data-theme", "light")
+   //       : document.body.setAttribute("data-theme", "dark");
+   // }, [theme]);
    useEffect(() => {
       fetchQuote();
       fetchTime();
