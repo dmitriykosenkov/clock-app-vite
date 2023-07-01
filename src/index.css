@@ -1,0 +1,100 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:300,regular,700);
+
+:root {
+   --main-font: "Inter";
+   --main-fw: 400;
+   --font-size: 24px;
+   --color-light-mode: rgba(255, 255, 255, 0.87);
+   --color-dark-mode: #303030;
+}
+
+* {
+   padding: 0px;
+   margin: 0px;
+   border: 0px;
+}
+*,
+*:before,
+*:after {
+   box-sizing: border-box;
+}
+:focus,
+:active {
+   /* outline: none; */
+}
+a:focus,
+a:active {
+   /* outline: none; */
+}
+html,
+body {
+   height: 100%;
+}
+body {
+   background-repeat: no-repeat;
+   background-size: cover;
+   color: #ffffff;
+   /* font-family: $fontFamily; */
+   font-family: var(--main-font);
+   font-size: var(--font-size);
+   font-weight: var(--main-fw);
+   /* text-rendering: optimizeLegibility; */
+   -ms-text-size-adjust: 100%;
+   -moz-text-size-adjust: 100%;
+   -webkit-text-size-adjust: 100%;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   transition: all ease 0.3s;
+}
+body[data-theme="light"] {
+   background-image: url("./assets/desktop/bg-image-daytime.jpg");
+   background-position: center;
+   background-color: grey;
+   background-blend-mode: multiply;
+   @media (max-width: 768px) {
+      filter: brightness(80%);
+      background-image: url("./assets/tablet/bg-image-daytime.jpg");
+   }
+   @media (max-width: 375px) {
+      background-image: url("./assets/mobile/bg-image-daytime.jpg");
+   }
+}
+body[data-theme="dark"] {
+   background-image: url("./assets/desktop/bg-image-nighttime.jpg");
+   @media (max-width: 768px) {
+      background-image: url("./assets/tablet/bg-image-nighttime.jpg");
+   }
+   @media (max-width: 375px) {
+      background-image: url("./assets/mobile/bg-image-nighttime.jpg");
+   }
+}
+input,
+button,
+textarea {
+   font-family: var(--main-font);
+   font-size: inherit;
+}
+button {
+   cursor: pointer;
+   color: inherit;
+   background-color: inherit;
+}
+a {
+   color: inherit;
+   text-decoration: none;
+}
+ul li {
+   list-style: none;
+}
+img {
+   vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-weight: inherit;
+   font-size: inherit;
+}

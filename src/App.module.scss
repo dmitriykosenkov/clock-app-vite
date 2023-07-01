@@ -1,0 +1,154 @@
+.wrapper {
+   position: relative;
+   height: 100vh;
+}
+.container {
+   height: 100%;
+   padding: 56px 30px 98px;
+   max-width: 1130px;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   @media (max-width: 768px) {
+      padding: 80px 64px 64px;
+   }
+   @media (max-width: 425px) {
+      padding: 31px 25px 64px;
+   }
+}
+
+// .slide {
+//    background: rgba(255, 255, 255, 0.75);
+//    backdrop-filter: blur(20.387113571166992px);
+//    width: 100%;
+//    height: 50%;
+//    bottom: 0;
+//    left: 0;
+//    position: absolute;
+//    transition: bottom ease 0.3s;
+//    @media (max-width: 768px) {
+//       height: 42%;
+//    }
+// }
+
+.quoteBlock {
+   width: 50%;
+   font-size: 18px;
+   line-height: 28px;
+   transition: all ease 0.9s;
+   display: flex;
+   gap: 16px;
+   @media (max-width: 768px) {
+      width: 100%;
+   }
+}
+.quoteContent {
+}
+.quoteImage {
+   padding-top: 5px;
+   img {
+      cursor: pointer;
+      transition: all ease 0.3s;
+      &:hover {
+         transform: rotate(90deg);
+      }
+   }
+}
+.quoteText {
+   margin-bottom: 13px;
+   @media (max-width: 375px) {
+      margin-bottom: 8px;
+   }
+}
+.quoteAuthor {
+   font-weight: 700;
+}
+
+.mainBlock {
+   display: flex;
+   justify-content: space-between;
+   transition: all ease 0.9s;
+   @media (max-width: 908px) {
+      flex-direction: column;
+      gap: 80px;
+   }
+}
+
+.time {
+   font-weight: 700;
+   @media (max-width: 768px) {
+      font-size: 18px;
+   }
+   @media (max-width: 640px) {
+      font-size: 15px;
+   }
+}
+.timeSubtitle {
+   font-weight: 400;
+   @media (max-width: 640px) {
+      span {
+         display: none;
+      }
+   }
+}
+.timeTitle {
+   font-size: 200px;
+   line-height: 1;
+   letter-spacing: -5px;
+   span {
+      margin-left: 5px;
+      letter-spacing: 1px;
+      font-size: 40px;
+      font-weight: 300;
+      line-height: 28px;
+   }
+   @media (max-width: 768px) {
+      font-size: 175px;
+      span {
+         font-size: 32px;
+      }
+   }
+   @media (max-width: 640px) {
+      font-size: 100px;
+      span {
+         font-size: 15px;
+      }
+   }
+}
+.timeLocation {
+   line-height: 28px;
+   letter-spacing: 4.8px;
+   text-transform: uppercase;
+}
+
+.btn {
+   cursor: pointer;
+   align-self: self-end;
+   display: flex;
+   align-items: center;
+   gap: 14px;
+   background-color: rgba(255, 255, 255);
+   border-radius: 28px;
+   padding: 8px 9px 8px 28px;
+   @media (max-width: 908px) {
+      align-self: self-start;
+   }
+}
+.buttonMore {
+   color: #000;
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 28px;
+   letter-spacing: 5px;
+   text-transform: uppercase;
+}
+.btnArrow {
+   width: 40px;
+   height: 40px;
+   background-color: #303030;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
