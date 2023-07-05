@@ -43,7 +43,7 @@ function App() {
       console.log(timezone);
       try {
          const response = await fetch(
-            "http://worldtimeapi.org/api/timezone/Europe/Kyiv"
+            "https://worldtimeapi.org/api/timezone/Europe/Kyiv"
          );
          return await response.json();
       } catch (error) {
