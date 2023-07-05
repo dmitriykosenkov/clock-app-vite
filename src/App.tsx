@@ -30,8 +30,6 @@ function App() {
       day_of_year: 0,
    });
    const fetchQuote = async () => {
-      console.log(timezone);
-
       try {
          const response = await fetch("https://api.quotable.io/random");
          const { statusCode, statusMessage, ...data } = await response.json();
@@ -42,11 +40,12 @@ function App() {
       }
    };
    const fetchTime = async () => {
+      console.log(timezone);
       try {
          const response = await fetch(
             "http://worldtimeapi.org/api/timezone/Europe/Kyiv"
          );
-         setTimezone(await response.json());
+         return await response.json();
       } catch (error) {
          console.log(error);
       }
@@ -58,14 +57,13 @@ function App() {
    }, [theme]);
    useEffect(() => {
       fetchQuote();
-      fetchTime();
-      
+      fetchTime().then((data) => setTimezone(data));
    }, []);
    useEffect(() => {
       const clockId = setInterval(() => {
          setCurrentTime(new Date());
-       }, 1000);
-       return () => clearInterval(clockId);
+      }, 1000);
+      return () => clearInterval(clockId);
    }, []);
 
    return (
@@ -99,7 +97,12 @@ function App() {
                   <div className={s.timeSubtitle}>
                      GOOD EVENING, <span>IT’S CURRENTLY</span>
                   </div>
-                  <div className={s.timeTitle}>{currentTime.toLocaleTimeString().replace(/(.*)\D\d+/, '$1')}<span>{timezone.abbreviation}</span></div>
+                  <div className={s.timeTitle}>
+                     {currentTime
+                        .toLocaleTimeString()
+                        .replace(/(.*)\D\d+/, "$1")}
+                     <span>{timezone.abbreviation}</span>
+                  </div>
                   <div className={s.timeLocation}>IN LONDON, UK</div>
                </div>
                <div
