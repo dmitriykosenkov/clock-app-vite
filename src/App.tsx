@@ -4,6 +4,9 @@ import arrowUp from "./assets/desktop/icon-arrow-up.svg";
 import refresh from "./assets/desktop/icon-refresh.svg";
 import s from "./App.module.scss";
 import InfoSlide from "./components/InfoSlide/InfoSlide";
+import { useClock } from "./hooks/useClock";
+import { getData } from "./hooks/helpers";
+// https://api.ipbase.com/v2/info?apikey=j5AHVfXqt0c6WhZmcBC5htvZTyGQTMBb3KjLBeGZ&language=en&ip=178.158.195.115
 
 interface QuoteType {
    content: string;
@@ -15,56 +18,65 @@ export interface TimezoneType {
    week_number: number;
    day_of_week: number;
    day_of_year: number;
+   client_ip: string;
+}
+export interface LocationType {
+   location: {
+      city: {
+         name: string,
+      },
+      country: {
+         name: string,
+      },
+   },
 }
 
 function App() {
    const [theme] = useState(true);
    const [openSlide, setOpenSlide] = useState(false);
+   const { currentTime } = useClock();
    const [quote, setQuote] = useState<QuoteType>({ author: "", content: "" });
-   const [currentTime, setCurrentTime] = useState(new Date());
+   const [location, setLocation] = useState<LocationType>({
+      location: {
+         city: {
+            name: "",
+         },
+         country: {
+            name: "",
+         },
+      },
+   });
    const [timezone, setTimezone] = useState<TimezoneType>({
       timezone: "",
       abbreviation: "",
       week_number: 0,
       day_of_week: 0,
       day_of_year: 0,
+      client_ip: "",
    });
-   const fetchQuote = async () => {
-      try {
-         const response = await fetch("https://api.quotable.io/random");
-         const { statusCode, statusMessage, ...data } = await response.json();
-         if (!response.ok) throw new Error(`${statusCode} ${statusMessage}`);
-         setQuote(data);
-      } catch (error) {
-         console.error(error);
-      }
-   };
-   const fetchTime = async () => {
-      console.log(timezone);
-      try {
-         const response = await fetch(
-            "https://worldtimeapi.org/api/timezone/Europe/Kyiv"
-         );
-         return await response.json();
-      } catch (error) {
-         console.log(error);
-      }
-   };
+
    useEffect(() => {
       theme
          ? document.body.setAttribute("data-theme", "light")
          : document.body.setAttribute("data-theme", "dark");
    }, [theme]);
    useEffect(() => {
-      fetchQuote();
-      fetchTime().then((data) => setTimezone(data));
+      getData("https://api.quotable.io/random").then((data) => setQuote(data));
+      getData("https://worldtimeapi.org/api/timezone/Europe/Kyiv").then(
+         (data: TimezoneType) => {
+            setTimezone(data);
+         }
+      );
    }, []);
    useEffect(() => {
-      const clockId = setInterval(() => {
-         setCurrentTime(new Date());
-      }, 1000);
-      return () => clearInterval(clockId);
-   }, []);
+      if (timezone.client_ip !== "") {
+         // console.log(timezone.client_ip);
+         
+         // getData(
+         //    `https://api.ipbase.com/v2/info?apikey=j5AHVfXqt0c6WhZmcBC5htvZTyGQTMBb3KjLBeGZ&language=en&ip=${timezone.client_ip}`
+         // ).then((data) => setLocation(data.data.location));
+      }
+   }, [timezone]);
 
    return (
       <div className={s.wrapper}>
@@ -75,17 +87,12 @@ function App() {
             {!openSlide && (
                <div className={s.quoteBlock}>
                   <div className={s.quoteContent}>
-                     <div className={s.quoteText}>
-                        {quote.content}
-                        {/* “The science of operations, as derived from mathematics
-                        more especially, is a science of itself, and has its own
-                        abstract truth and value.” */}
-                     </div>
+                     <div className={s.quoteText}>{quote.content}</div>
                      <div className={s.quoteAuthor}>{quote.author}</div>
                   </div>
                   <div className={s.quoteImage}>
                      <img
-                        onClick={() => fetchQuote()}
+                        // onClick={() => fetchQuote()}
                         src={refresh}
                         alt="refresh"
                      />
@@ -103,7 +110,10 @@ function App() {
                         .replace(/(.*)\D\d+/, "$1")}
                      <span>{timezone.abbreviation}</span>
                   </div>
-                  <div className={s.timeLocation}>IN LONDON, UK</div>
+                  <div className={s.timeLocation}>
+                     IN {location.location.city.name},{" "}
+                     {location.location.country.name}
+                  </div>
                </div>
                <div
                   className={s.btn}
