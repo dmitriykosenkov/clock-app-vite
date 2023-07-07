@@ -36,7 +36,7 @@ function App() {
    const [openSlide, setOpenSlide] = useState(false);
    const { currentTime } = useClock();
    const [quote, setQuote] = useState<QuoteType>({ author: "", content: "" });
-   const [location, setLocation] = useState<LocationType>({
+   const [location] = useState<LocationType>({
       location: {
          city: {
             name: "",
