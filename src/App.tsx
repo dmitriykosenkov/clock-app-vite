@@ -61,7 +61,7 @@ function App() {
          : document.body.setAttribute("data-theme", "dark");
    }, [theme]);
    useEffect(() => {
-      getData("https://api.quotable.io/random").then((data) => setQuote(data));
+      // getData("https://api.quotable.io/random").then((data) => setQuote(data));
       getData("https://worldtimeapi.org/api/timezone/Europe/Kyiv").then(
          (data: TimezoneType) => {
             setTimezone(data);
